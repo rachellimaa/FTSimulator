@@ -1,21 +1,27 @@
 #pragma once
 
+#include "pag2.h"
+
+#include "pag4.h"
+
 namespace FTSimulator2014 {
 
+	
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	
+	
 	/// <summary>
 	/// Summary for FTSimulatorMainGUI
 	/// </summary>
 	public ref class FTSimulatorMainGUI : public System::Windows::Forms::Form
 	{
 	public:
-		FTSimulatorMainGUI(void)
+	  FTSimulatorMainGUI(void)
 		{
 			InitializeComponent();
 			//
@@ -77,6 +83,7 @@ namespace FTSimulator2014 {
 			this->button1->TabIndex = 2;
 			this->button1->Text = L" > FFT";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &FTSimulatorMainGUI::button1_Click);
 			// 
 			// button2
 			// 
@@ -88,6 +95,7 @@ namespace FTSimulator2014 {
 			this->button2->TabIndex = 3;
 			this->button2->Text = L"> QFT";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &FTSimulatorMainGUI::button2_Click);
 			// 
 			// linkLabel1
 			// 
@@ -98,6 +106,7 @@ namespace FTSimulator2014 {
 			this->linkLabel1->TabIndex = 4;
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"https://code.google.com/p/ftsimulator/";
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &FTSimulatorMainGUI::linkLabel1_LinkClicked);
 			// 
 			// label1
 			// 
@@ -130,7 +139,6 @@ namespace FTSimulator2014 {
 			this->textBox1->Size = System::Drawing::Size(182, 36);
 			this->textBox1->TabIndex = 0;
 			this->textBox1->Text = L"FTSimulator";
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &FTSimulatorMainGUI::textBox1_TextChanged);
 			// 
 			// label3
 			// 
@@ -175,8 +183,25 @@ namespace FTSimulator2014 {
 
 		}
 #pragma endregion
-	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-        
+		
+
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 pag2 ^ form = gcnew pag2;
+			 form->ShowDialog();
+     
+}
+
+private: System::Void linkLabel1_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
+			
+			
+		System::Diagnostics::Process::Start("https://code.google.com/p/ftsimulator/");	 
+			
 	}
+
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+			 pag4 ^ form = gcnew pag4;
+			 form->ShowDialog();
+ }
 };
 }
+
