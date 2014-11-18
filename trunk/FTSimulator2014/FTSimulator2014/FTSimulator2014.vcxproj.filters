@@ -42,6 +42,18 @@
     <ClCompile Include="qft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pag2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pag3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pag4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pag5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FTSimulatorMainGUI.h">
@@ -71,5 +83,31 @@
     <ClInclude Include="qft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pag2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pag3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pag4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pag5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FTSimulatorMainGUI.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag2.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag3.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag4.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
