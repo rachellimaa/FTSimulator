@@ -86,6 +86,10 @@
     <ClCompile Include="latexParser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrixGenerator.cpp" />
+    <ClCompile Include="pag2.cpp" />
+    <ClCompile Include="pag3.cpp" />
+    <ClCompile Include="pag4.cpp" />
+    <ClCompile Include="pag5.cpp" />
     <ClCompile Include="qft.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +102,37 @@
     <ClInclude Include="interface.h" />
     <ClInclude Include="latexParser.h" />
     <ClInclude Include="matrixGenerator.h" />
+    <ClInclude Include="pag2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pag3.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pag4.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pag5.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Parser.h" />
     <ClInclude Include="qft.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FTSimulatorMainGUI.resx">
+      <DependentUpon>FTSimulatorMainGUI.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag2.resx">
+      <DependentUpon>pag2.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag3.resx">
+      <DependentUpon>pag3.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag4.resx">
+      <DependentUpon>pag4.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag5.resx">
+      <DependentUpon>pag5.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
