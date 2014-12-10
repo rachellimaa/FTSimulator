@@ -4,6 +4,8 @@
 
 #include "pag4.h"
 
+#include "FTSimulatorMainGUI.h"
+
 namespace FTSimulator2014 {
 
 	
@@ -177,6 +179,8 @@ namespace FTSimulator2014 {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->Name = L"FTSimulatorMainGUI";
+			this->ShowInTaskbar = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"FTSimulatorMainGUI";
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -185,11 +189,14 @@ namespace FTSimulator2014 {
 #pragma endregion
 		
 
-private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 pag2 ^ form = gcnew pag2;
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){ 
+			 pag2 ^ form = gcnew pag2;   
+		     this->Visible = false;
 			 form->ShowDialog();
-     
+			 
+
 }
+
 
 private: System::Void linkLabel1_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
 			
@@ -200,6 +207,7 @@ private: System::Void linkLabel1_LinkClicked(System::Object^  sender, System::Wi
 
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			 pag4 ^ form = gcnew pag4;
+			 this->Visible = false;
 			 form->ShowDialog();
  }
 };
