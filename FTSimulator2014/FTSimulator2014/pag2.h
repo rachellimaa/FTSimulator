@@ -143,7 +143,7 @@ namespace FTSimulator2014 {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(100, 32);
 			this->button1->TabIndex = 10;
-			this->button1->Text = L" > Input File";
+			this->button1->Text = L" > Input_fft";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &pag2::button1_Click);
 			// 
