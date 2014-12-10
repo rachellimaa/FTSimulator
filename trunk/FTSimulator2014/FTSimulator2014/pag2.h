@@ -2,6 +2,7 @@
 
 #include "pag3.h"
 
+
 namespace FTSimulator2014 {
 
 	using namespace System;
@@ -144,6 +145,7 @@ namespace FTSimulator2014 {
 			this->button1->TabIndex = 10;
 			this->button1->Text = L" > Input File";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &pag2::button1_Click);
 			// 
 			// textBox1
 			// 
@@ -171,8 +173,12 @@ namespace FTSimulator2014 {
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
+			this->ImeMode = System::Windows::Forms::ImeMode::Disable;
 			this->Name = L"pag2";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"pag2";
+			this->Load += gcnew System::EventHandler(this, &pag2::pag2_Load);
+			this->MdiChildActivate += gcnew System::EventHandler(this, &pag2::button2_Click);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -184,7 +190,15 @@ private: System::Void linkLabel1_LinkClicked(System::Object^  sender, System::Wi
    }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			 pag3 ^ form = gcnew pag3;
+			 this->Visible = false;
 			 form->ShowDialog();
-  }
- };
+			
+}
+private: System::Void pag2_Load(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 
+}
+};
 }

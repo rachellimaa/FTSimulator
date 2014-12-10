@@ -180,6 +180,7 @@ namespace FTSimulator2014 {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->Name = L"pag4";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"pag4";
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -191,6 +192,7 @@ namespace FTSimulator2014 {
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 			 pag5 ^ form = gcnew pag5;
+			 this->Visible = false;
 			 form->ShowDialog();
 }
 };

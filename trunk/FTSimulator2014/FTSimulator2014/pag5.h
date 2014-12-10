@@ -141,6 +141,7 @@ namespace FTSimulator2014 {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->Name = L"pag5";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"pag5";
 			this->ResumeLayout(false);
 			this->PerformLayout();
