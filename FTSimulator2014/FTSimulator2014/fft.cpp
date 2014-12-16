@@ -6,6 +6,7 @@
 //   When utilizing credit LIBROW site
 
 //   Include declaration file
+
 #include "fft.h"
 #include "latexParser.h"
 #include "interface.h"
@@ -24,6 +25,7 @@ using std::cout;
 using std::ifstream;
 using std::cin;
 using std::ios;
+using namespace System::Windows::Forms;
 
 complex CFFT::*cSignal;
 
@@ -196,6 +198,20 @@ void CFFT::Scale(complex *const Data, const unsigned int N)
 	//   Scale all data entries
 	for (unsigned int Position = 0; Position < N; ++Position)
 		Data[Position] *= Factor;
+}
+
+void CFFT::chamada(){
+	int arraySize = getFileSize();
+	// Verify if array size is a power of 2
+	if (arraySize  < 1 || arraySize & (arraySize - 1)){
+		return;
+	}
+	complex(*cSignal) = new complex[arraySize];
+	createFFTArray(cSignal, arraySize);
+	createFFTInputFiles(cSignal, arraySize);
+	Forward(cSignal, arraySize);
+	FFTArrayToFile(cSignal, arraySize);
+
 }
 
 
@@ -401,6 +417,9 @@ void CFFT::generateArrayPredefinedFunction(complex *cSignal, int option){
 					*cSignal = complex(1,0);
 					break;
 			}
+
+
+
 
 
 

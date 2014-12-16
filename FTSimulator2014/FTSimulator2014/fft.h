@@ -42,6 +42,8 @@ public:
 	// Performs the FFT
 	static void performFFT();
 
+	static void CFFT::chamada();
+
 protected:
 	//   Rearrange function and its inplace version
 	static void Rearrange(const complex *const Input, complex *const Output, const unsigned int N);
@@ -53,6 +55,7 @@ protected:
 	//   Scaling of inverse FFT result
 	static void Scale(complex *const Data, const unsigned int N);
 
+	
 
 	private:
 		static int getFileSize();
