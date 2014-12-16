@@ -1,10 +1,13 @@
 #pragma once
 
 #include "pag3.h"
+#include "fft.h"
 
 
 namespace FTSimulator2014 {
 
+
+	using namespace std;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -12,6 +15,8 @@ namespace FTSimulator2014 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
+
+	static void chamaFFT();
 	/// <summary>
 	/// Sumário para pag2
 	/// </summary>
@@ -198,23 +203,9 @@ private: System::Void pag2_Load(System::Object^  sender, System::EventArgs^  e) 
 }
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 Stream^ myStream;
-			 OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog;
 
 
-			 if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-				 if ((myStream = openFileDialog1->OpenFile()) != nullptr){
-
-					 String^ strfilename = openFileDialog1->InitialDirectory + openFileDialog1->FileName;
-					
-					 String^ Readfile = File::ReadAllText(strfilename);
-
-						 MessageBox::Show(Readfile);
-					     myStream->Close();
-				 }
-
-
-			 }
+			 CFFT::chamada();
 }
 };
 }
