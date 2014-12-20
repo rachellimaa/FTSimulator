@@ -17,6 +17,7 @@
 #include <climits>
 #include <string>
 
+
 #define MAX_SIZE 16
 #define PI 3.14159265358979323846
 
@@ -26,6 +27,8 @@ using std::ifstream;
 using std::cin;
 using std::ios;
 using namespace System::Windows::Forms;
+using namespace System;
+
 
 complex CFFT::*cSignal;
 
@@ -200,58 +203,45 @@ void CFFT::Scale(complex *const Data, const unsigned int N)
 		Data[Position] *= Factor;
 }
 
-void CFFT::chamada(){
-	int arraySize = getFileSize();
+void CFFT::fftToLatex(string filename) {
+	int arraySize = getFileSize(filename);
+	CPARSER::parser(arraySize);
+	CPARSER::generatesPDF();
+
+}
+
+/*
+ Executa a FFT a partir do caminho de um arquivo informado como parâmetro
+*/
+bool CFFT::fftFromFile(string filename){
+
+	int arraySize = getFileSize(filename);
 	// Verify if array size is a power of 2
 	if (arraySize  < 1 || arraySize & (arraySize - 1)){
-		return;
+		return 1;
 	}
 	complex(*cSignal) = new complex[arraySize];
-	createFFTArray(cSignal, arraySize);
-	createFFTInputFiles(cSignal, arraySize);
+	bool t1 = createFFTArray(cSignal, arraySize, filename);
+	bool t2 = createFFTInputFiles(cSignal, arraySize);
 	Forward(cSignal, arraySize);
-	FFTArrayToFile(cSignal, arraySize);
+	bool t3 = FFTArrayToFile(cSignal, arraySize);
 
+	return t1 || t2 || t3;
 }
 
-
-void CFFT::performFFT(){
-
-
-	int option = CINTERFACE::initialFFTMessage();
-	if (option == 1) {
-		int arraySize = getFileSize();
-		// Verify if array size is a power of 2
-		if ( arraySize  < 1 || arraySize & (arraySize - 1)){
-			CINTERFACE::errorInputFFTPower();
-		}
-		complex (*cSignal) = new complex[arraySize];
-		createFFTArray(cSignal,arraySize);
-		createFFTInputFiles(cSignal,arraySize);
-		Forward(cSignal, arraySize);
-		FFTArrayToFile(cSignal,arraySize);
-		CINTERFACE::fftSuccessful();
-		if (CINTERFACE::generateLaTeXData() == 1){
-			CPARSER::parser(arraySize);
-			CPARSER::generatesPDF();
-		} 
-	} else {
-		int function = CINTERFACE::preDefinedFunctions();
-		complex (*cSignal) = new complex[MAX_SIZE];
-		generateArrayPredefinedFunction(cSignal,function);
-		createFFTInputFiles(cSignal,MAX_SIZE);
-		Forward(cSignal,MAX_SIZE);
-		FFTArrayToFile(cSignal,MAX_SIZE);
-		if (CINTERFACE::generateLaTeXData() == 1){
-			CPARSER::parser(MAX_SIZE);
-			CPARSER::generatesPDF();
-		} 
-
-	}
-	
+void CFFT::fftFromFunction(int function) {
+	complex(*cSignal) = new complex[MAX_SIZE];
+	generateArrayPredefinedFunction(cSignal, function);
+	createFFTInputFiles(cSignal, MAX_SIZE);
+	Forward(cSignal, MAX_SIZE);
+	FFTArrayToFile(cSignal, MAX_SIZE);
 }
 
-int CFFT::getFileSize(){
+void CFFT::performFFT() {
+	//deprecated
+}
+
+int CFFT::getFileSize(string filename){
 
 	int size = 0;
 	int endPoint = -1;
@@ -259,7 +249,7 @@ int CFFT::getFileSize(){
 	int i = 0;
 
 	try{
-		ifstream dados("input_fft.txt", ios::in); 
+		ifstream dados(filename, ios::in); 
 		if (dados.is_open()){
 			while ((dados.good())&&(endPoint == -1)){
 				int atual = dados.get();
@@ -272,17 +262,17 @@ int CFFT::getFileSize(){
 		}
 		dados.close();		
 	} catch (ifstream::failure e){
-		CINTERFACE::errorInputFFTFile();
+		
 	}
 
 	return size;
 
 }
 
-void CFFT::createFFTArray(complex *cSignal, int arraySize){
+bool CFFT::createFFTArray(complex *cSignal, int arraySize, string filename){
 
 	try {
-		ifstream dados("input_fft.txt", ios::in);
+		ifstream dados(filename, ios::in);
 		string str;
 		char real_char[10];
 		char imaginario_char[10];
@@ -325,20 +315,19 @@ void CFFT::createFFTArray(complex *cSignal, int arraySize){
 
 
 	} catch (ifstream::failure e){
-			CINTERFACE::errorInputFFTFile();
+		return 1;
 	}
-	
-
+	return 0;
 
 
 }
 
-void CFFT::FFTArrayToFile(complex *cSignal, int arraySize){
+bool CFFT::FFTArrayToFile(complex *cSignal, int arraySize){
 
 	 try{
 		//Creates the output files
-		ofstream myfile_1 ("fft_real_output.txt");
-		ofstream myfile_2 ("fft_imaginary_output.txt");
+		ofstream myfile_1 ("./output/fft_real_output.txt");
+		ofstream myfile_2 ("./output/fft_imaginary_output.txt");
 
 		//Saving the FFT matrix
 		if (myfile_1.is_open() && myfile_2.is_open()){
@@ -351,18 +340,19 @@ void CFFT::FFTArrayToFile(complex *cSignal, int arraySize){
 			myfile_2.close();
 		}
 	 } catch (ifstream::failure e){
-			CINTERFACE::errorOutputFFTFile();
-
+		 return 1;
 	}
+
+	 return 0;
 
 
 }
 
-void CFFT::createFFTInputFiles(complex *cSignal, int arraySize){
+bool CFFT::createFFTInputFiles(complex *cSignal, int arraySize){
 
 	//Cria o Arquivo de saida de dados em .txt para futuras utilizações
-	ofstream myfile_1 ("fft_real_input.txt");
-	ofstream myfile_2 ("fft_imaginary_input.txt");
+	ofstream myfile_1 ("./output/fft_real_input.txt");
+	ofstream myfile_2 ("./output/fft_imaginary_input.txt");
 
 	//Salvando a Matriz no Arquivo
 	try {
@@ -376,9 +366,10 @@ void CFFT::createFFTInputFiles(complex *cSignal, int arraySize){
 			myfile_2.close();
 		}
 	} catch (ifstream::failure e){
-		CINTERFACE::errorInputFFTFile();
-
+		return 1;
 	}
+
+	return 0;
 }
 
 void CFFT::generateArrayPredefinedFunction(complex *cSignal, int option){
@@ -424,5 +415,3 @@ void CFFT::generateArrayPredefinedFunction(complex *cSignal, int option){
 
 
 }
-
-

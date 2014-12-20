@@ -19,30 +19,25 @@ complex CQFT::**qSignal;
 complex CQFT::**qftOp;
 
 
-void CQFT::performQFT(){
+void CQFT::performQFT(string filename){
 
-	const int matrixSize = CQFT::matrixSize();
+	const int matrixSize = CQFT::matrixSize(filename);
 	complex (**qSignal) = new complex*[matrixSize];
 	for (int i = 0; i < matrixSize; i++){
 		qSignal[i] = new complex[matrixSize];		
 	}
-	createQFTArray(qSignal,matrixSize);
+	createQFTArray(qSignal,matrixSize, filename);
 	qft(qSignal,matrixSize); 
-
-	for(int i = 0; i < matrixSize; i++) 
-		for(int j = 0; j < matrixSize; j++)
-			cout << "qSignal[" << i << "][" << j << "] = " << qSignal[i][j].re() << ", " << qSignal[i][j].im() << "\n";
-
 	createQFTOutput(qSignal,matrixSize); 
-	CINTERFACE::qftSuccessful();
+
 }
 
 
 
 
-int CQFT::matrixSize(){
+int CQFT::matrixSize(string filename){
 
-	ifstream dados("input_qft.txt", ios::in); //Abre o arquivo input.txt
+	ifstream dados(filename, ios::in); //Abre o arquivo input.txt
 
 	int size = 0;
 	int line = 0;
@@ -51,7 +46,7 @@ int CQFT::matrixSize(){
 	int i = 0;
 
 	try{
-		ifstream dados("input_qft.txt", ios::in); 
+		ifstream dados(filename, ios::in); 
 		if (dados.is_open()){
 			while ((dados.good())&&(endPoint == -1)){
 				int atual = dados.get();
@@ -78,11 +73,11 @@ int CQFT::matrixSize(){
 	return size;
 }
 
-void CQFT::createQFTArray(complex **qSignal,int matrixSize){
+void CQFT::createQFTArray(complex **qSignal,int matrixSize, std::string filename){
 
 
 	try {
-        ifstream dados("input_qft.txt", ios::in); //Abre o arquivo input.txt
+        ifstream dados(filename, ios::in); //Abre o arquivo input.txt
 
 		string str;
 		char real_char[5000];
@@ -213,7 +208,7 @@ void CQFT::qftOperator(complex **qftOp, int N){
 
 void CQFT::createQFTOutput(complex **qSignal,int matrixSize){
 	try{
-		ofstream data("output_qft.txt", ios::out); //Abre o arquivo output.txt
+		ofstream data("./output/output_qft.txt", ios::out); //Abre o arquivo output.txt
 
 		if (data.is_open()){
 			for(int i=0; i < matrixSize; i++){
