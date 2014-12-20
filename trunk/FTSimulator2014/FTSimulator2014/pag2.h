@@ -204,8 +204,8 @@ private: System::Void pag2_Load(System::Object^  sender, System::EventArgs^  e) 
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
-
-			 CFFT::chamada();
+			 string temp = "input_fft.txt";
+			 CFFT::fftFromFile(temp);
 }
 };
 }

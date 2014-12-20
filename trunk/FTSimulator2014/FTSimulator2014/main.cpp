@@ -27,7 +27,7 @@ int main()
 		CFFT::performFFT(); 
 	} else {
       // Chamar QFT
-		CQFT::performQFT();
+	//	CQFT::performQFT();
 	}
 
 	CINTERFACE::exitMessage();

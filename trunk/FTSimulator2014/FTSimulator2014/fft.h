@@ -10,6 +10,7 @@
 
 //   Include complex numbers header
 #include "complex.h"
+#include <string>
 
 class CFFT
 {
@@ -40,9 +41,11 @@ public:
 
 
 	// Performs the FFT
-	static void performFFT();
-
-	static void CFFT::chamada();
+	static void CFFT::performFFT();
+	static bool CFFT::fftFromFile(std::string filename);
+	static void CFFT::fftToLatex(std::string filename);
+	static void CFFT::fftFromFunction(int function);
+	
 
 protected:
 	//   Rearrange function and its inplace version
@@ -58,10 +61,10 @@ protected:
 	
 
 	private:
-		static int getFileSize();
-		static void createFFTArray(complex *cSignal, int arraySize);
-		static void createFFTInputFiles(complex *cSignal, int arraySize);
-		static void FFTArrayToFile(complex *cSignal, int arraySize);
+		static int getFileSize(std::string filename);
+		static bool createFFTArray(complex *cSignal, int arraySize, std::string filename);
+		static bool createFFTInputFiles(complex *cSignal, int arraySize);
+		static bool FFTArrayToFile(complex *cSignal, int arraySize);
 		static void generateArrayPredefinedFunction(complex *cSignal, int option);
 };
 
