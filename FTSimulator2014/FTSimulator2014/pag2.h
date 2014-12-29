@@ -2,6 +2,7 @@
 
 #include "pag3.h"
 #include "fft.h"
+#include <msclr\marshal_cppstd.h>
 
 
 namespace FTSimulator2014 {
@@ -203,9 +204,15 @@ private: System::Void pag2_Load(System::Object^  sender, System::EventArgs^  e) 
 }
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	           
+	           std::string stdString;
+	           System::String^ systemString = msclr::interop::marshal_as<System::String^>(stdString);
+	          
+			    string temp = "C:/Users/Rachel/Desktop/Projeto Elloa/fft_real_input.txt";
+			    CFFT::fftFromFile(temp);
 
-			 string temp = "input_fft.txt";
-			 CFFT::fftFromFile(temp);
+
+		 
 }
 };
 }

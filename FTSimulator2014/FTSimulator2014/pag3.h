@@ -148,6 +148,7 @@ namespace FTSimulator2014 {
 			// 
 			// comboBox1
 			// 
+			this->comboBox1->DisplayMember = L"sin";
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
 				L"Sin", L"Cosin", L"Constant", L"Retangular Pulse",
@@ -157,6 +158,8 @@ namespace FTSimulator2014 {
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(205, 21);
 			this->comboBox1->TabIndex = 25;
+			this->comboBox1->ValueMember = L"cos";
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &pag3::comboBox1_SelectedIndexChanged);
 			// 
 			// pag3
 			// 
@@ -175,6 +178,7 @@ namespace FTSimulator2014 {
 			this->Name = L"pag3";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"pag3";
+			this->Load += gcnew System::EventHandler(this, &pag3::pag3_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -187,6 +191,12 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 pag5 ^ form = gcnew pag5;
 			 this->Visible = false;
 			 form->ShowDialog();
+
+}
+private: System::Void pag3_Load(System::Object^  sender, System::EventArgs^  e) {
+
+}
+private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 
 }
 };
