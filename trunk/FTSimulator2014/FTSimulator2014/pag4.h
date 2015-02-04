@@ -1,15 +1,18 @@
 #pragma once
 
 #include "pag5.h"
+#include <string.h>
+#include "fft.h"
 
 namespace FTSimulator2014 {
 
+	using namespace std;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
-	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Windows::Forms;
 
 	/// <summary>
 	/// Sumário para pag4
@@ -163,6 +166,7 @@ namespace FTSimulator2014 {
 			this->button2->TabIndex = 34;
 			this->button2->Text = L"Browse Files";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &pag4::button2_Click);
 			// 
 			// pag4
 			// 
@@ -195,5 +199,25 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 this->Visible = false;
 			 form->ShowDialog();
 }
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+			 using namespace Runtime::InteropServices;
+			 OpenFileDialog^ openFileDialog1 = gcnew System::Windows::Forms::OpenFileDialog();
+			 openFileDialog1->ShowDialog();
+			 String^ temp = openFileDialog1->FileName;
+			 			
+			 string stringTransformed;
+			  const char* chars =
+					 (const char*)(Marshal::StringToHGlobalAnsi(temp)).ToPointer();
+			 stringTransformed = chars;
+			 Marshal::FreeHGlobal(IntPtr((void*)chars));
+
+			 //cout << stringTransformed << endl;
+
+
+			 //CFFT::fftFromFile(stringTransformed);
+
+			 
+}
+
 };
 }
