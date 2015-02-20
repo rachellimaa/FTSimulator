@@ -13,6 +13,7 @@ namespace FTSimulator2014 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Windows::Forms;
+	using namespace System::Diagnostics;
 
 	/// <summary>
 	/// Sumário para pag4
@@ -199,22 +200,27 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 this->Visible = false;
 			 form->ShowDialog();
 }
+
+
+private: System::Void MarshalString(String ^ s, string& os) {
+			 using namespace Runtime::InteropServices;
+			 const char* chars =
+				 (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+			 os = chars;
+			 Marshal::FreeHGlobal(IntPtr((void*)chars));
+ }
+
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			 using namespace Runtime::InteropServices;
 			 OpenFileDialog^ openFileDialog1 = gcnew System::Windows::Forms::OpenFileDialog();
 			 openFileDialog1->ShowDialog();
 			 String^ temp = openFileDialog1->FileName;
-			 			
-			 string stringTransformed;
-			  const char* chars =
-					 (const char*)(Marshal::StringToHGlobalAnsi(temp)).ToPointer();
-			 stringTransformed = chars;
-			 Marshal::FreeHGlobal(IntPtr((void*)chars));
 
-			 //cout << stringTransformed << endl;
-
-
-			 //CFFT::fftFromFile(stringTransformed);
+			 string stringTransformed = "a";
+			 MarshalString(temp, stringTransformed);
+			 Debug::WriteLine("Teste");
+			 CFFT::fftFromFile(stringTransformed);
+			 MessageBox::Show("Aqui!");
 
 			 
 }
