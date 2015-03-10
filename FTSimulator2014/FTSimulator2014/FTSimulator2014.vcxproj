@@ -82,6 +82,7 @@
     <ClCompile Include="complex.cpp" />
     <ClCompile Include="DataManagement.cpp" />
     <ClCompile Include="fft.cpp" />
+    <ClCompile Include="fftinputfile.cpp" />
     <ClCompile Include="FTSimulatorMainGUI.cpp" />
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="latexParser.cpp" />
@@ -97,6 +98,9 @@
     <ClInclude Include="complex.h" />
     <ClInclude Include="DataManagement.h" />
     <ClInclude Include="fft.h" />
+    <ClInclude Include="fftinputfile.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="FTSimulatorMainGUI.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -119,6 +123,9 @@
     <ClInclude Include="qft.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="fftinputfile.resx">
+      <DependentUpon>fftinputfile.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FTSimulatorMainGUI.resx">
       <DependentUpon>FTSimulatorMainGUI.h</DependentUpon>
     </EmbeddedResource>
