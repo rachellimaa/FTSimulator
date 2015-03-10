@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pag3.h"
-#include "pag4.h"
+#include "fftinputfile.h"
 #include "fft.h"
 
 
@@ -204,7 +204,7 @@ private: System::Void pag2_Load(System::Object^  sender, System::EventArgs^  e) 
 }
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 pag4 ^ form = gcnew pag4;
+			 fftinputfile ^ form = gcnew fftinputfile;
 			 this->Visible = false;
 			 form->ShowDialog();
 	
