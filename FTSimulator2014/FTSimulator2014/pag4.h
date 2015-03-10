@@ -220,7 +220,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			 MarshalString(temp, stringTransformed);
 			 Debug::WriteLine("Teste");
 			 CFFT::fftFromFile(stringTransformed);
-			 MessageBox::Show("Aqui!");
+			 MessageBox::Show("Results in the folder output!");
 
 			 
 }
