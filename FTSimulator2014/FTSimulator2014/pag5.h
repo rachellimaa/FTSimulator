@@ -8,6 +8,7 @@ namespace FTSimulator2014 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Sumário para pag5
@@ -17,6 +18,7 @@ namespace FTSimulator2014 {
 	public:
 		pag5(void)
 		{
+			windir = System::Environment::GetEnvironmentVariable("windir");
 			InitializeComponent();
 			//
 			//TODO: Adicione o código do construtor aqui
@@ -41,6 +43,8 @@ namespace FTSimulator2014 {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::LinkLabel^  linkLabel2;
+	private: System::Windows::Forms::ListBox^  listBox1;
 
 	private:
 		/// <summary>
@@ -61,6 +65,8 @@ namespace FTSimulator2014 {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->linkLabel2 = (gcnew System::Windows::Forms::LinkLabel());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
 			// label2
@@ -122,11 +128,31 @@ namespace FTSimulator2014 {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(302, 85);
+			this->label3->Location = System::Drawing::Point(319, 85);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(81, 20);
+			this->label3->Size = System::Drawing::Size(64, 20);
 			this->label3->TabIndex = 15;
-			this->label3->Text = L"Graphics";
+			this->label3->Text = L"Output";
+			this->label3->Click += gcnew System::EventHandler(this, &pag5::label3_Click);
+			// 
+			// linkLabel2
+			// 
+			this->linkLabel2->AutoSize = true;
+			this->linkLabel2->Location = System::Drawing::Point(48, 128);
+			this->linkLabel2->Name = L"linkLabel2";
+			this->linkLabel2->Size = System::Drawing::Size(132, 13);
+			this->linkLabel2->TabIndex = 16;
+			this->linkLabel2->TabStop = true;
+			this->linkLabel2->Text = L"./output/fft_real_output.txt";
+			this->linkLabel2->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &pag5::linkLabel2_LinkClicked);
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(232, 128);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(256, 134);
+			this->listBox1->TabIndex = 17;
 			// 
 			// pag5
 			// 
@@ -134,6 +160,8 @@ namespace FTSimulator2014 {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ScrollBar;
 			this->ClientSize = System::Drawing::Size(713, 372);
+			this->Controls->Add(this->listBox1);
+			this->Controls->Add(this->linkLabel2);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -143,6 +171,7 @@ namespace FTSimulator2014 {
 			this->Name = L"pag5";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"pag5";
+			this->Load += gcnew System::EventHandler(this, &pag5::pag5_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -151,5 +180,36 @@ namespace FTSimulator2014 {
 	private: System::Void linkLabel1_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
 				 System::Diagnostics::Process::Start("https://code.google.com/p/ftsimulator/");
 	}
+private: System::Void pag5_Load(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void label3_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: String ^ windir;
+
+private: System::Void linkLabel2_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
+			 listBox1->Items->Clear();
+			 MessageBox::Show(String::Concat(windir, ("\\fft_real_output.txt")));
+			 try
+			 {
+				 String^ textFile = String::Concat(windir, ("../output/fft_real_output.txt"));
+				 StreamReader ^reader = gcnew  System::IO::StreamReader(textFile);
+				 MessageBox::Show(String::Concat(windir, ("../output/fft_real_output.txt")));
+
+				 do
+				 {
+					 listBox1->Items->Add(reader->ReadLine());
+				 } while (reader->Peek() != -1);
+			 }
+			 catch (FileNotFoundException ^ex)
+			 {
+				 listBox1->Items->Add(ex);
+			 }
+
+			 catch (System::Exception ^e)
+			 {
+				 listBox1->Items->Add(e);
+			 }
+}
 };
 }

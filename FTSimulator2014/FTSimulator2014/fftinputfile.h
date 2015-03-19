@@ -1,5 +1,6 @@
 #include "fft.h"
 #include <string.h>
+#include "pag5.h"
 
 #pragma once
 
@@ -40,6 +41,7 @@ namespace FTSimulator2014 {
 			}
 		}
 	private: System::Windows::Forms::Button^  button2;
+	private: String^ temp;
 	protected:
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Label^  label4;
@@ -153,6 +155,7 @@ namespace FTSimulator2014 {
 			this->button1->TabIndex = 36;
 			this->button1->Text = L" > Proceed";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &fftinputfile::button1_Click);
 			// 
 			// textBox1
 			// 
@@ -200,17 +203,32 @@ namespace FTSimulator2014 {
 
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 
-		using namespace Runtime::InteropServices;
-		OpenFileDialog^ openFileDialog1 = gcnew System::Windows::Forms::OpenFileDialog();
-		openFileDialog1->ShowDialog();
-		String^ temp = openFileDialog1->FileName;
-
-		string stringTransformed = "a";
-		MarshalString(temp, stringTransformed);
-		Debug::WriteLine("Teste");
-		CFFT::fftFromFile(stringTransformed);
-		MessageBox::Show("Results in the folder output!");
+				 using namespace Runtime::InteropServices;
+				 OpenFileDialog^ openFileDialog1 = gcnew System::Windows::Forms::OpenFileDialog();
+				 openFileDialog1->ShowDialog();
+				 temp = openFileDialog1->FileName;
 
 	}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+			
+
+			 string stringTransformed = "a";
+			 MarshalString(temp, stringTransformed);
+			 Debug::WriteLine("Teste");
+			 bool b =  CFFT::fftFromFile(stringTransformed);
+			 if (!b){
+				 MessageBox::Show("Results in the folder output!");
+				 // Abrir próxima tela
+				 pag5 ^ form = gcnew pag5;
+				 this->Visible = false;
+				 form->ShowDialog();
+			 }
+			 else {
+				 MessageBox::Show("Erro no processamento");
+				 // Recomeçar da tela inicial
+			 }
+			 
+}
 };
 }
