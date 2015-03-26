@@ -2,30 +2,32 @@
 #include <fstream>
 #include "complex.h"
 #include "latexParser.h"
+#include <string>
 #define PI 3.14159265358979323846
 
 using namespace std;
 using std::cout;
 using std::ios;
 using std::ifstream;
+using std::string;
 
 
 
-void CPARSER::parser(int arraySize){
+void CPARSER::parser(int arraySize, std::string path){
 
 	//Creates the .tex output files
-     ofstream absoluto_input ("input_fft_absolute.tex");
-	 ofstream fase_input ("input_fft_phase.tex");
-	 ofstream absoluto_fft ("output_fft_absolute.tex");
-	 ofstream fase_fft ("output_fft_phase.tex");
+     ofstream absoluto_input (path + "/output/input_fft_absolute.tex");
+	 ofstream fase_input (path + "/output/input_fft_phase.tex");
+	 ofstream absoluto_fft (path + "/output/output_fft_absolute.tex");
+	 ofstream fase_fft (path + "/output/output_fft_phase.tex");
 
 	 // Open the fft input files
-	 ifstream real_input("fft_real_input.txt", ios::in);
-	 ifstream imaginario_input("fft_imaginary_input.txt", ios::in);
+	 ifstream real_input(path + "/output/fft_real_input.txt", ios::in);
+	 ifstream imaginario_input(path + "/output/fft_imaginary_input.txt", ios::in);
 
 	// Open the output files of the Fourier Transform
-	ifstream real_fft("fft_real_output.txt", ios::in);
-	ifstream imaginario_fft("fft_imaginary_output.txt", ios::in);
+	ifstream real_fft(path + "/output/fft_real_output.txt", ios::in);
+	ifstream imaginario_fft(path + "/output/fft_imaginary_output.txt", ios::in);
 
 	try {
 		if (absoluto_input.is_open() && fase_input.is_open() &&
@@ -277,11 +279,17 @@ double CPARSER::findMaxValue(int arraySize, ifstream &real, ifstream &imaginary)
 	
 }
 
-void CPARSER::generatesPDF(){
-	system("pdflatex input_fft_absolute.tex");
-	system("pdflatex input_fft_phase.tex");
-	system("pdflatex output_fft_absolute.tex");
-	system("pdflatex output_fft_phase.tex");
+void CPARSER::generatesPDF(std::string path){
+	
+	std::string caminho1 = "pdflatex " + path + "/output/input_fft_absolute.tex " + path + "/output/input_fft_absolute.pdf";
+	std::string caminho2 = "pdflatex " + path + "/output/input_fft_phase.tex " + path + "/output/input_fft_phase.tex.pdf";
+	std::string caminho3 = "pdflatex " + path + "/output/output_fft_absolute.tex " + path + "/output/output_fft_absolute.pdf";
+	std::string caminho4 = "pdflatex " + path + "/output/output_fft_phase.tex " + path + "/output/output_fft_phase.pdf";
+
+	system(caminho1.c_str());
+	system(caminho2.c_str());
+	system(caminho3.c_str());
+	system(caminho4.c_str());
 
 	system("start input_fft_absolute.pdf");
 	system("start input_fft_phase.pdf");

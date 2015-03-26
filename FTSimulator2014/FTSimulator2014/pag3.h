@@ -188,7 +188,7 @@ namespace FTSimulator2014 {
 				 System::Diagnostics::Process::Start("https://code.google.com/p/ftsimulator/");
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 pag5 ^ form = gcnew pag5;
+			 pag5 ^ form = gcnew pag5("",""); // corrigir isto
 			 this->Visible = false;
 			 form->ShowDialog();
 
