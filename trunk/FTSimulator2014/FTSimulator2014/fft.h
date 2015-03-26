@@ -42,9 +42,9 @@ public:
 
 	// Performs the FFT
 	static void CFFT::performFFT();
-	static bool CFFT::fftFromFile(std::string filename);
-	static void CFFT::fftToLatex(std::string filename);
-	static void CFFT::fftFromFunction(int function);
+	static bool CFFT::fftFromFile(std::string filename, std::string path);
+	static void CFFT::fftToLatex(std::string filename, std::string path);
+	static void CFFT::fftFromFunction(int function, std::string path);
 	
 
 protected:
@@ -63,8 +63,8 @@ protected:
 	private:
 		static int getFileSize(std::string filename);
 		static bool createFFTArray(complex *cSignal, int arraySize, std::string filename);
-		static bool createFFTInputFiles(complex *cSignal, int arraySize);
-		static bool FFTArrayToFile(complex *cSignal, int arraySize);
+		static bool createFFTInputFiles(complex *cSignal, int arraySize, std::string path);
+		static bool FFTArrayToFile(complex *cSignal, int arraySize, std::string path);
 		static void generateArrayPredefinedFunction(complex *cSignal, int option);
 };
 

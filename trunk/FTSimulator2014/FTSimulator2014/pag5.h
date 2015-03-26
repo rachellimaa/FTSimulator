@@ -1,7 +1,10 @@
 #pragma once
+#include "fft.h"
+#include <string.h>
 
 namespace FTSimulator2014 {
 
+	using namespace std;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -15,16 +18,21 @@ namespace FTSimulator2014 {
 	/// </summary>
 	public ref class pag5 : public System::Windows::Forms::Form
 	{
+
+	
 	public:
-		pag5(void)
+		pag5(String^ myFile, String^ myPath)
 		{
-			windir = System::Environment::GetEnvironmentVariable("windir");
+			file = myFile;
+			path = myPath;
 			InitializeComponent();
 			//
 			//TODO: Adicione o código do construtor aqui
 			//
 		}
 
+	private: String^ path;
+	private: String^ file;
 	protected:
 		/// <summary>
 		/// Limpar os recursos que estão sendo usados.
@@ -37,7 +45,6 @@ namespace FTSimulator2014 {
 			}
 		}
 	private: System::Windows::Forms::Label^  label2;
-	protected:
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::LinkLabel^  linkLabel1;
 	private: System::Windows::Forms::Button^  button1;
@@ -110,6 +117,7 @@ namespace FTSimulator2014 {
 			this->button1->TabIndex = 10;
 			this->button1->Text = L" > LaTeX";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &pag5::button1_Click);
 			// 
 			// textBox1
 			// 
@@ -185,16 +193,14 @@ private: System::Void pag5_Load(System::Object^  sender, System::EventArgs^  e) 
 private: System::Void label3_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 
-private: String ^ windir;
-
 private: System::Void linkLabel2_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
 			 listBox1->Items->Clear();
-			 MessageBox::Show(String::Concat(windir, ("\\fft_real_output.txt")));
+			 MessageBox::Show(String::Concat(path, ("\\output\\fft_real_output.txt")));
 			 try
 			 {
-				 String^ textFile = String::Concat(windir, ("../output/fft_real_output.txt"));
+				 String^ textFile = String::Concat(path, ("\\output\\fft_real_output.txt"));
 				 StreamReader ^reader = gcnew  System::IO::StreamReader(textFile);
-				 MessageBox::Show(String::Concat(windir, ("../output/fft_real_output.txt")));
+		
 
 				 do
 				 {
@@ -210,6 +216,30 @@ private: System::Void linkLabel2_LinkClicked(System::Object^  sender, System::Wi
 			 {
 				 listBox1->Items->Add(e);
 			 }
+}
+
+
+		private: System::Void MarshalString2(String ^ s, string& os) {
+					 using namespace Runtime::InteropServices;
+					 const char* chars =
+						 (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+					 os = chars;
+					 Marshal::FreeHGlobal(IntPtr((void*)chars));
+		}
+
+
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+			 // transformação do nome do arquivo
+			 std::string fileTransformed = "a";
+			 MarshalString2(file, fileTransformed);
+			 
+			 // transformação do caminho do arquivo
+			 std::string pathTransformed = "a";
+			 MarshalString2(path, pathTransformed);
+
+			 CFFT::fftToLatex(fileTransformed,pathTransformed);
+
 }
 };
 }

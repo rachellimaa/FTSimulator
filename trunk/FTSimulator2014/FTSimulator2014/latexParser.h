@@ -8,9 +8,9 @@ class CPARSER
 {
 
 	public:
-		static void generatesPDF();
+		static void generatesPDF(std::string);
 		static double findMaxValue(int, ifstream &, ifstream &);
-		static void parser(int);
+		static void parser(int, std::string);
 		static void mergeFiles();
 
 };

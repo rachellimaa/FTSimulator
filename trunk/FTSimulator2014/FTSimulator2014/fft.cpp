@@ -16,6 +16,7 @@
 #include <math.h>
 #include <climits>
 #include <string>
+#include <cstring>
 
 
 #define MAX_SIZE 16
@@ -203,17 +204,17 @@ void CFFT::Scale(complex *const Data, const unsigned int N)
 		Data[Position] *= Factor;
 }
 
-void CFFT::fftToLatex(string filename) {
-	int arraySize = getFileSize(filename);
-	CPARSER::parser(arraySize);
-	CPARSER::generatesPDF();
+void CFFT::fftToLatex(string filename, string path) {
+	int arraySize = getFileSize(path + filename);
+	CPARSER::parser(arraySize,path);
+	CPARSER::generatesPDF(path);
 
 }
 
 /*
  Executa a FFT a partir do caminho de um arquivo informado como parâmetro
 */
-bool CFFT::fftFromFile(string filename){
+bool CFFT::fftFromFile(string filename, string path){
 
 	int arraySize = getFileSize(filename);
 	// Verify if array size is a power of 2
@@ -222,19 +223,19 @@ bool CFFT::fftFromFile(string filename){
 	}
 	complex(*cSignal) = new complex[arraySize];
 	bool t1 = createFFTArray(cSignal, arraySize, filename);
-	bool t2 = createFFTInputFiles(cSignal, arraySize);
+	bool t2 = createFFTInputFiles(cSignal, arraySize,path);
 	Forward(cSignal, arraySize);
-	bool t3 = FFTArrayToFile(cSignal, arraySize);
+	bool t3 = FFTArrayToFile(cSignal, arraySize,path);
 
 	return t1 || t2 || t3;
 }
 
-void CFFT::fftFromFunction(int function) {
+void CFFT::fftFromFunction(int function, string path) {
 	complex(*cSignal) = new complex[MAX_SIZE];
 	generateArrayPredefinedFunction(cSignal, function);
-	createFFTInputFiles(cSignal, MAX_SIZE);
+	createFFTInputFiles(cSignal, MAX_SIZE,path);
 	Forward(cSignal, MAX_SIZE);
-	FFTArrayToFile(cSignal, MAX_SIZE);
+	FFTArrayToFile(cSignal, MAX_SIZE, path);
 }
 
 void CFFT::performFFT() {
@@ -322,12 +323,12 @@ bool CFFT::createFFTArray(complex *cSignal, int arraySize, string filename){
 
 }
 
-bool CFFT::FFTArrayToFile(complex *cSignal, int arraySize){
+bool CFFT::FFTArrayToFile(complex *cSignal, int arraySize, string path){
 
 	 try{
 		//Creates the output files
-		ofstream myfile_1 ("./output/fft_real_output.txt");
-		ofstream myfile_2 ("./output/fft_imaginary_output.txt");
+		ofstream myfile_1 (path + "./output/fft_real_output.txt");
+		ofstream myfile_2 (path + "./output/fft_imaginary_output.txt");
 
 		//Saving the FFT matrix
 		if (myfile_1.is_open() && myfile_2.is_open()){
@@ -348,11 +349,14 @@ bool CFFT::FFTArrayToFile(complex *cSignal, int arraySize){
 
 }
 
-bool CFFT::createFFTInputFiles(complex *cSignal, int arraySize){
+bool CFFT::createFFTInputFiles(complex *cSignal, int arraySize, string path){
+
+	std::string fft_real_input = path + "/output/fft_real_input.txt";
+	std::string fft_imaginary_input = path + "/output/fft_imaginary_input.txt";
 
 	//Cria o Arquivo de saida de dados em .txt para futuras utilizações
-	ofstream myfile_1 ("./output/fft_real_input.txt");
-	ofstream myfile_2 ("./output/fft_imaginary_input.txt");
+	ofstream myfile_1(fft_real_input);
+	ofstream myfile_2(fft_imaginary_input);
 
 	//Salvando a Matriz no Arquivo
 	try {

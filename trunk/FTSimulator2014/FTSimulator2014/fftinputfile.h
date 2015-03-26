@@ -1,6 +1,7 @@
 #include "fft.h"
 #include <string.h>
 #include "pag5.h"
+#include <algorithm>
 
 #pragma once
 
@@ -42,6 +43,7 @@ namespace FTSimulator2014 {
 		}
 	private: System::Windows::Forms::Button^  button2;
 	private: String^ temp;
+	private: String^ path;
 	protected:
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Label^  label4;
@@ -207,20 +209,26 @@ namespace FTSimulator2014 {
 				 OpenFileDialog^ openFileDialog1 = gcnew System::Windows::Forms::OpenFileDialog();
 				 openFileDialog1->ShowDialog();
 				 temp = openFileDialog1->FileName;
+				 path = System::IO::Path::GetDirectoryName(openFileDialog1->FileName);
 
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 			
-
+			 // transformação do nome do arquivo
 			 string stringTransformed = "a";
 			 MarshalString(temp, stringTransformed);
-			 Debug::WriteLine("Teste");
-			 bool b =  CFFT::fftFromFile(stringTransformed);
+			 
+			 // transformação do caminho do arquivo
+			 string pathTransformed = "a";
+			 MarshalString(path, pathTransformed);
+
+			 
+			 bool b =  CFFT::fftFromFile(stringTransformed,pathTransformed);
 			 if (!b){
 				 MessageBox::Show("Results in the folder output!");
 				 // Abrir próxima tela
-				 pag5 ^ form = gcnew pag5;
+				 pag5 ^ form = gcnew pag5(temp, path);
 				 this->Visible = false;
 				 form->ShowDialog();
 			 }
