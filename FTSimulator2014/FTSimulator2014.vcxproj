@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2BAD64AF-E886-4EF5-A3CB-3FDBFBCF1D25}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>FTSimulator2014</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions);_CONSOLE</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+      <TerminalServerAware>true</TerminalServerAware>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="complex.cpp" />
+    <ClCompile Include="DataManagement.cpp" />
+    <ClCompile Include="fft.cpp" />
+    <ClCompile Include="fftinputfile.cpp" />
+    <ClCompile Include="FTSimulatorMainGUI.cpp" />
+    <ClCompile Include="interface.cpp" />
+    <ClCompile Include="latexParser.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="matrixGenerator.cpp" />
+    <ClCompile Include="pag2.cpp" />
+    <ClCompile Include="pag3.cpp" />
+    <ClCompile Include="pag4.cpp" />
+    <ClCompile Include="pag5.cpp" />
+    <ClCompile Include="qft.cpp" />
+    <ClCompile Include="SaidaPreDefined.cpp" />
+    <ClCompile Include="saidaqft.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="complex.h" />
+    <ClInclude Include="DataManagement.h" />
+    <ClInclude Include="fft.h" />
+    <ClInclude Include="fftinputfile.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="FTSimulatorMainGUI.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="interface.h" />
+    <ClInclude Include="latexParser.h" />
+    <ClInclude Include="matrixGenerator.h" />
+    <ClInclude Include="pag2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pag3.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pag4.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="pag5.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="qft.h" />
+    <ClInclude Include="SaidaPreDefined.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="saidaqft.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="fftinputfile.resx">
+      <DependentUpon>fftinputfile.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTSimulatorMainGUI.resx">
+      <DependentUpon>FTSimulatorMainGUI.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag2.resx">
+      <DependentUpon>pag2.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag3.resx">
+      <DependentUpon>pag3.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag4.resx">
+      <DependentUpon>pag4.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pag5.resx">
+      <DependentUpon>pag5.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaidaPreDefined.resx">
+      <DependentUpon>SaidaPreDefined.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="saidaqft.resx">
+      <DependentUpon>saidaqft.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
