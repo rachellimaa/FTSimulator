@@ -40,6 +40,7 @@ namespace FTSimulator2014 {
 			file = myFile;
 			path = myPath;
 			InitializeComponent();
+			file = "fft_real_input.txt";
 			//
 			//TODO: Adicione o código do construtor aqui
 			//
@@ -355,7 +356,7 @@ namespace FTSimulator2014 {
 
 	}
 private: System::Void linkLabel4_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
-	file = "fft_real_input.txt";
+	
 	
 	path = Directory::GetCurrentDirectory();
 
