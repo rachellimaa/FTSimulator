@@ -24,7 +24,7 @@ namespace FTSimulator2014 {
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
-			//
+			///
 		}
 
 	//public:SaidaPreDefined(System::Windows::Forms::Form ^ frm1)
