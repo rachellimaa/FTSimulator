@@ -59,6 +59,7 @@
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>Main</EntryPointSymbol>
       <TerminalServerAware>true</TerminalServerAware>
+      <StackReserveSize>8000000</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,6 +96,7 @@
     <ClCompile Include="qft.cpp" />
     <ClCompile Include="SaidaPreDefined.cpp" />
     <ClCompile Include="saidaqft.cpp" />
+    <ClCompile Include="strassen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="complex.h" />
@@ -106,6 +108,7 @@
     <ClInclude Include="FTSimulatorMainGUI.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="strassen.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="latexParser.h" />
     <ClInclude Include="matrixGenerator.h" />

@@ -1,10 +1,13 @@
 #include "qft.h"
+#include "strassen.h"
 #include "complex.h"
 #include "interface.h"
 #include <iostream>
 #include <fstream>
 #include <climits>
 #include <string>
+
+
 
 #define PI 3.14159265358979323846
 
@@ -180,24 +183,7 @@ void CQFT::qft(complex **qSignal, int matrixSize){
 
 	qftOperator(qftMatrix, matrixSize);
 
-	complex (**auxiliary) = new complex*[matrixSize];
-	for (int i = 0; i < matrixSize; i++){
-		auxiliary[i] = new complex[matrixSize];		
-	}
-
-	for(int i = 0; i < matrixSize; i++) 
-		for(int j = 0; j < matrixSize; j++)
-			for(int k = 0; k < matrixSize; k++)
-				auxiliary[i][j] += (qftMatrix[i][k])*(qSignal[k][j]);
-	
-	for (int i = 0; i < matrixSize; i++)
-		qSignal[i] = new complex[matrixSize];	// Zerando a matrix para que seja possível preenchê-la novamente	
-	
-
-	for(int i = 0; i < matrixSize; i++) 
-		for(int j = 0; j < matrixSize; j++)
-			for(int k = 0; k < matrixSize; k++)
-				qSignal[i][j] += (auxiliary[i][k])*(qftMatrix[k][j].conjugate());
+	CSTRASSEN::chamaStrassen(matrixSize, qftMatrix, qSignal);
 
 }
 
